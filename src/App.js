@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {
+    decCounter,
+    incCounter,
+    resetCounter
+} from "./redux/create-action";
+import {BrowserRouter as Router} from "react-router-dom";
+import {Links} from "./components/Links";
+import {RoutsApp} from "./components/RoutsApp";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const counter = useSelector(({counters: {counter: {value}}}) => value)
+    const dispatch = useDispatch()
+
+    return (
+        <Router>
+            <div className="App">
+                Hello, counter = {counter}
+            </div>
+
+            <button onClick={() => {
+                dispatch(incCounter())
+            }}>Inc counter
+            </button>
+            <button onClick={() => {
+                dispatch(decCounter())
+            }}>Dec counter
+            </button>
+            <button onClick={() => {
+                dispatch(resetCounter())
+            }}>Reset counter
+            </button>
+
+            <hr/>
+            <Links/>
+            <RoutsApp/>
+
+        </Router>
+    );
 }
 
 export default App;
