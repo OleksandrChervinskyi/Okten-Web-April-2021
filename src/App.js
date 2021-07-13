@@ -1,25 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import {CreacteTodoForm} from "./CreacteTodoForm";
+import {TodosList} from "./TodosList";
+import {useDispatch, useSelector} from "react-redux";
+import {inc, incPay} from "./features/counter/counterSlice";
+import {addTodosToStore, fetchTodos} from "./features/dataFromBackend/todosSlice";
+import {useEffect} from "react";
+import {Todos} from "./features/dataFromBackend/Todos";
+import {Counter} from "./features/counter/Counter";
+import {Form} from "./features/form/Form";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    // const onTodoCreate = async (title, description) => {
+    //     if (!title || !description) return
+    //
+    //     const resp = await fetch('http://localhost:8888/create-todo', {
+    //         method: 'POST',
+    //         body: JSON.stringify({title, description}),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     const data = await resp .json()
+    //
+    // }
+
+
+    return (
+        <div className="App">
+
+            <Counter/>
+            <Form/>
+            <Todos/>
+
+
+            {/*<CreacteTodoForm onSubmit={onTodoCreate}/>*/}
+            {/*<TodosList/>*/}
+        </div>
+    );
 }
 
 export default App;
