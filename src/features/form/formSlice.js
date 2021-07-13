@@ -4,8 +4,7 @@ const formSlice = createSlice({
     name: 'form',
     initialState: {
         title: '',
-        description: '',
-        isLoading: false
+        description: ''
     },
     reducers: {
         addTitleFromFormToStore(state, action) {
@@ -13,18 +12,12 @@ const formSlice = createSlice({
         },
         addDescriptionFromFormToStore(state, action) {
             state.description = action.payload
-        },
-        isLoadingTrue(state) {
-            state.isLoading = true
-        },
-        isLoadingFalse(state) {
-            state.isLoading = false
         }
     }
 })
 
 export const {
-    addTitleFromFormToStore, addDescriptionFromFormToStore, isLoadingTrue, isLoadingFalse
+    addTitleFromFormToStore, addDescriptionFromFormToStore
 } = formSlice.actions
 
 export default formSlice.reducer

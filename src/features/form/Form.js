@@ -5,14 +5,23 @@ import {createNewTodo} from "../dataFromBackend/todosSlice";
 export const Form = () => {
 
     const dispatch = useDispatch()
-    const {title, description, isLoading} = useSelector(({formDetails}) => formDetails)
-    console.log(isLoading)
-    const clickSubmit = (e) => {
+    const {title, description} = useSelector(({formDetails}) => formDetails)
+    const isLoading = useSelector(({endpoints: {isLoading}}) => isLoading)
+
+    const clickSubmit = async (e) => {
         e.preventDefault()
-        if (!title || !description) return
+        if (!title || !description || isLoading) return
 
+        try {
+            // Create and sent new todos to backend
+            await dispatch(createNewTodo(title, description))
 
-        dispatch(createNewTodo(title, description))
+            // Delete text from form
+            dispatch(addTitleFromFormToStore(''))
+            dispatch(addDescriptionFromFormToStore(''))
+        } catch {
+            console.error('Not created, catch used')
+        }
     }
 
     return (
@@ -23,7 +32,7 @@ export const Form = () => {
                 <input type={'text'} placeholder={'enter description'} value={description}
                        onChange={({target: {value}}) => dispatch(addDescriptionFromFormToStore(value))}/>
 
-                <button type={'submit'} disabled={!title || !description}> Create new todo
+                <button type={'submit'} disabled={!title || !description || isLoading}> Create new todo
                 </button>
 
             </form>
