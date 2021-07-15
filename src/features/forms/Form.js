@@ -16,7 +16,7 @@ export const Form = () => {
             // Create and sent new todos to backend
             await dispatch(createNewTodo(title, description))
 
-            // Delete text from form
+            // Delete text from forms
             dispatch(addTitleFromFormToStore(''))
             dispatch(addDescriptionFromFormToStore(''))
         } catch {

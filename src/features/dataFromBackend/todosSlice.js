@@ -10,12 +10,16 @@ const todosSlice = createSlice({
         addTodosToStore(state, actions) {
             state.todos = actions.payload
         },
-        pushNewTodoToStore(state, actions) {
-            state.todos.push(actions.payload)
+        unshiftNewTodoToStore(state, actions) {
+            state.todos.unshift(actions.payload)
         },
         deleteTodoFromStore(state, actions) {
-           state.todos =  state.todos.filter(el => el.id !== actions.payload)
+            state.todos = state.todos.filter(el => el.id !== actions.payload)
         },
+        // updateTodoinStore(state, actions) {
+        //     let outdatedTodo = state.todos.find(el => el.id = actions.payload.id)
+        //     outdatedTodo = JSON.stringify(JSON.parse(actions.payload))
+        // },
         isLoadingTrue(state) {
             state.isLoading = true
         },
@@ -26,10 +30,11 @@ const todosSlice = createSlice({
 })
 export const {
     addTodosToStore,
-    pushNewTodoToStore,
+    unshiftNewTodoToStore,
     isLoadingTrue,
     isLoadingFalse,
-    deleteTodoFromStore
+    deleteTodoFromStore,
+    updateTodoinStore
 } = todosSlice.actions
 
 // get all Todos
@@ -56,7 +61,7 @@ export const createNewTodo = (title, description) => async dispatch => {
             }
         })
         const data = await resp.json()
-        dispatch(pushNewTodoToStore(data))
+        dispatch(unshiftNewTodoToStore(data))
 
     } catch (e) {
         console.log(e)
@@ -65,7 +70,31 @@ export const createNewTodo = (title, description) => async dispatch => {
     }
 }
 
-// remove all Todos
+// update completed in todo
+export const updateTodo = (newTodo) => async dispatch => {
+
+    try {
+        const resp = await fetch('http://localhost:8888/update-todo/' + newTodo.id, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                completed: !newTodo.completed,
+                title: newTodo.title,
+                description: newTodo.description
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+
+        })
+        const data = await resp.json()
+        dispatch(deleteTodoFromStore(newTodo.id))
+        dispatch(unshiftNewTodoToStore(data))
+    } catch (e) {
+        console.log('Sms wrong', e)
+    }
+}
+
+// remove one Todo
 export const removeTodo = (id) => async dispatch => {
 
     try {
