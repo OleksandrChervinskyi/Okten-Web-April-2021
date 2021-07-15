@@ -16,10 +16,10 @@ const todosSlice = createSlice({
         deleteTodoFromStore(state, actions) {
             state.todos = state.todos.filter(el => el.id !== actions.payload)
         },
-        // updateTodoinStore(state, actions) {
-        //     let outdatedTodo = state.todos.find(el => el.id = actions.payload.id)
-        //     outdatedTodo = JSON.stringify(JSON.parse(actions.payload))
-        // },
+        updateTodoinStore(state, actions) {
+            let outdatedTodo = state.todos.find(el => el.id = actions.payload.id)
+            outdatedTodo = JSON.stringify(JSON.parse(actions.payload))
+        },
         isLoadingTrue(state) {
             state.isLoading = true
         },
@@ -34,7 +34,6 @@ export const {
     isLoadingTrue,
     isLoadingFalse,
     deleteTodoFromStore,
-    updateTodoinStore
 } = todosSlice.actions
 
 // get all Todos
@@ -98,6 +97,7 @@ export const updateTodo = (newTodo) => async dispatch => {
 export const removeTodo = (id) => async dispatch => {
 
     try {
+        dispatch(isLoadingTrue())
         const resp = await fetch('http://localhost:8888/delete-todo/' + id, {
             method: 'DELETE'
         })
@@ -105,6 +105,8 @@ export const removeTodo = (id) => async dispatch => {
         dispatch(deleteTodoFromStore(id))
     } catch {
         console.log('Not delete')
+    } finally {
+        dispatch(isLoadingFalse())
     }
 }
 
