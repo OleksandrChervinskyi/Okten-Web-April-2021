@@ -1,7 +1,12 @@
-export const TodoDetails = () => {
+import {TodoDetailsReturn} from "./TodoDetailsReturn";
+
+export const TodoDetails = (props) => {
+
+    const {item} = props.location.state
+
+
+
     return (
-        <div>
-            details
-        </div>
+        <TodoDetailsReturn item={item}/>
     )
 }

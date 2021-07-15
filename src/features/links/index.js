@@ -2,12 +2,12 @@ import {Link} from "react-router-dom";
 
 export const Links = () => {
     return (
-        <div>
+        <div className={'nav'}>
+            <Link to={'/'}>
+                Main page
+            </Link>
             <Link to={'/todos'}>
                 Todos
-            </Link>
-            <Link to={'/'}>
-                Main
             </Link>
         </div>
     )

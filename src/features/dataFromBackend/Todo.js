@@ -98,7 +98,7 @@ export const Todo = ({item}) => {
             <Link to={{
                 pathname : '/todos/' + item.id,
                 state : {item}
-            }}>Details</Link>
+            }}> - Details</Link>
             <hr/>
 
         </>

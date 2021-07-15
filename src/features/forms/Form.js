@@ -26,6 +26,7 @@ export const Form = () => {
 
     return (
         <>
+            <h2>Create new todo</h2>
             <form onSubmit={clickSubmit}>
                 <input type={'text'} placeholder={'enter title'} value={title}
                        onChange={({target: {value}}) => dispatch(addTitleFromFormToStore(value))}/>
@@ -36,6 +37,7 @@ export const Form = () => {
                 </button>
 
             </form>
+            <hr/>
         </>
     )
 }
