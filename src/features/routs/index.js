@@ -1,13 +1,16 @@
-import {Route} from "react-router-dom";
-import {Todos} from "../dataFromBackend/Todos";
+import {Route, Switch} from "react-router-dom";
+import {TodoDetails} from "../dataFromBackend/TodoDetails";
+
 
 export const Routs = () => {
     return (
         <>
-            <Route path={'/todos'} component={Todos}/>
-            <Route path={'/'} > Main</Route>
+            <Switch>
+                <Route path={'/todos/:id'} component={TodoDetails}/>
+                <Route path={'/'} exact> Main Page</Route>
+            </Switch>
+
+
         </>
-
-
     )
 }

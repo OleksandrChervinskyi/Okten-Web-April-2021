@@ -2,7 +2,8 @@ import './App.css';
 import {Todos} from "./features/dataFromBackend/Todos";
 import {Counter} from "./features/counter/Counter";
 import {Form} from "./features/forms/Form";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
+import {Routs} from "./features/routs";
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
                 <Counter/>
                 <Form/>
                 <Todos/>
+
+                <Routs/>
             </Router>
         </div>
 

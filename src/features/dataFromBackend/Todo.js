@@ -1,6 +1,7 @@
 import {removeTodo, updateTodo} from "./todosSlice";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 
 export const Todo = ({item}) => {
     const dispatch = useDispatch()
@@ -94,6 +95,10 @@ export const Todo = ({item}) => {
                 onClick={() => saveAndSentNewDataToServer(item.id, inputTitleLocalValue, inputDescriptionLocalValue, selectValue)}>
                 Save
             </button>}
+            <Link to={{
+                pathname : '/todos/' + item.id,
+                state : {item}
+            }}>Details</Link>
             <hr/>
 
         </>

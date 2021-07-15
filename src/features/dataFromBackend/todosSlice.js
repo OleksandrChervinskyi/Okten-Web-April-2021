@@ -16,10 +16,10 @@ const todosSlice = createSlice({
         deleteTodoFromStore(state, actions) {
             state.todos = state.todos.filter(el => el.id !== actions.payload)
         },
-        updateTodoinStore(state, actions) {
-            let outdatedTodo = state.todos.find(el => el.id = actions.payload.id)
-            outdatedTodo = JSON.stringify(JSON.parse(actions.payload))
-        },
+        // updateTodoinStore(state, actions) {
+        //     let outdatedTodo = state.todos.find(el => el.id = actions.payload.id)
+        //     outdatedTodo = JSON.stringify(JSON.parse(actions.payload))
+        // },
         isLoadingTrue(state) {
             state.isLoading = true
         },
@@ -39,12 +39,15 @@ export const {
 // get all Todos
 export const fetchTodos = (e) => async dispatch => {
     try {
+        dispatch(isLoadingTrue())
         const resp = await fetch('http://localhost:8888/get-todos')
         const data = await resp.json()
 
         dispatch(addTodosToStore(data))
     } catch {
         console.log(e)
+    }finally {
+        dispatch(isLoadingFalse())
     }
 }
 

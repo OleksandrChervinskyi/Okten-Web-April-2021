@@ -5,7 +5,7 @@ import {Todo} from "./Todo";
 
 
 export const Todos = () => {
-    const todos = useSelector(({endpoints: {todos}}) => todos)
+    const {todos, isLoading} = useSelector(({endpoints}) => endpoints)
     const dispatch = useDispatch()
 
 
@@ -13,9 +13,10 @@ export const Todos = () => {
         dispatch(fetchTodos())
     }, [])
 
+
     return (
         <div>
-            {!todos.length && <h4>Is loading...</h4>}
+            {isLoading && <h4>Is loading...</h4>}
 
             {todos.map(todo => <li className={'todo'} key={todo.id}>
                 <Todo item={todo}/>
