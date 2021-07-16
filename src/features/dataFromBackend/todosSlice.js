@@ -34,6 +34,7 @@ export const {
     isLoadingTrue,
     isLoadingFalse,
     deleteTodoFromStore,
+
 } = todosSlice.actions
 
 // get all Todos
@@ -46,7 +47,23 @@ export const fetchTodos = (e) => async dispatch => {
         dispatch(addTodosToStore(data))
     } catch {
         console.log(e)
-    }finally {
+    } finally {
+        dispatch(isLoadingFalse())
+    }
+}
+
+// get one Todo
+export const fetchOneTodo = (id) => async dispatch => {
+    try {
+        dispatch(isLoadingTrue())
+        const resp = await fetch('http://localhost:8888/todo/' + id)
+        const data = await resp.json()
+
+        return data
+        // dispatch(addOneTodoToSpecialStore(data))
+    } catch (e) {
+        console.log(e)
+    } finally {
         dispatch(isLoadingFalse())
     }
 }

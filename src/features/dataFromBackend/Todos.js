@@ -14,16 +14,17 @@ export const Todos = () => {
         dispatch(fetchTodos())
     }, [])
 
-
     return (
         <>
             <Form/>
             <div>
                 {isLoading && <h4>Is loading...</h4>}
-
-                {todos.map(todo => <li className={'todo'} key={todo.id}>
-                    <Todo item={todo}/>
-                </li>)}
+                {todos
+                    .slice()
+                    .sort((a, b) => (a.createdAt > b.createdAt) ? -1 : 1)
+                    .map(todo => <li className={'todo'} key={todo.id}>
+                        <Todo item={todo}/>
+                    </li>)}
             </div>
         </>
 
