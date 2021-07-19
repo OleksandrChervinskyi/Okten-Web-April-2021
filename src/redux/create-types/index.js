@@ -1,0 +1,24 @@
+const INC = 'INC'
+const INCCUSTOM = 'INC CUSTOM'
+const DEC = 'DEC'
+const RESET = 'RESET'
+const GETPOSTS = 'GET POSTS'
+const GETUSERS = 'GET USERS'
+const GETALBUMS = 'GET ALBUMS'
+const GETPHOTOS = 'GET PHOTOS'
+const GETTODOS = 'GET TODOS'
+const GETCOMMENTS = 'GET COMMENTS'
+
+
+export {
+    INC,
+    INCCUSTOM,
+    DEC,
+    RESET,
+    GETPOSTS,
+    GETUSERS,
+    GETALBUMS,
+    GETPHOTOS,
+    GETTODOS,
+    GETCOMMENTS,
+}
